@@ -1,0 +1,159 @@
+#basic-modal-content {display:none;}
+
+/* Overlay */
+#simplemodal-overlay {background-color:#000; cursor:wait;}
+
+/* Container */
+#simplemodal-container {max-height:750px; min-height: 450px; width:455px;   background-color: #2F292B;  border:4px solid #444; }
+#simplemodal-container .simplemodal-data {padding:3px;}
+#simplemodal-container code {background:#141414; border-left:3px solid #65B43D; color:#bbb; display:block; font-size:12px; margin-bottom:12px; padding:4px 6px 6px;}
+#simplemodal-container a {color:#ddd;}
+#simplemodal-container a.modalCloseImg { width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+#simplemodal-container h3 {color:#84b8d9;}
+
+.simplemodal-close{
+ float: right;
+    font-size: 16px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+#simplemodal-container #blazemeter-login-modal{
+ /*padding: 30px;*/
+}
+
+.blazemeter-button{
+ border: 1px solid;
+ padding: 5px;
+ cursor: pointer;
+ font-weight: bold;
+}
+
+.button-selected{
+background-color:#92B901;
+}
+
+.tooltip {
+	display:none;
+    background: none repeat scroll 0 0 #2F292B;
+    color: white;
+    display: none;
+    font-size: 12px;
+    padding: 25px;
+    z-index:9999;
+    width: 570px;
+     height: 250px;
+}
+
+
+.sc_img, .sc_desc, .sc_int{
+	display:inline-block;
+	vertical-align: top;
+}
+.sc_img{
+	  width: 37%;
+	float:left;
+}
+.sc_desc{
+	width: 28%;
+	float:left;
+}
+.sc_int{
+	width: 34%;
+	float:right;
+}
+
+
+.ui-slider-range.ui-widget-header {
+border: none;
+background-color: #414042;
+background-image: none;
+color: white;
+font-weight: bold;
+}
+
+.ui-slider.ui-widget-content {
+	border: none;
+}
+
+.ui-slider-horizontal {
+	height: .6em!important;
+}
+
+.ui-slider .ui-slider-handle{
+	width: 1.1em!important;
+	height: 1.1em!important;
+	border: none!important;
+	background: none!important;
+	background-color: #D3C2A9!important;
+}
+.ui-slider{
+	background:none!important;
+	background-color: #A7A9AC!important;
+    margin-bottom: 15px;
+}
+
+#blazemeter-admin-settings-form  .form-submit {
+	background-color: #2F2A2B;
+	border:1px solid #BAC4C8;
+	display:inline-block;
+	color:#BAC4C8;
+	font-weight:bold;
+	padding:2px 12px;
+	text-decoration:none;
+	position: relative;
+	background-image: none;
+	margin: 10px 0 10px 5px;
+}
+#blazemeter-admin-settings-form  .form-submit:hover{
+	border:1px solid #FF2257;
+	color:#FF2257;
+}
+
+#edit-testid-wrapper{
+ float: left;
+}
+
+#edit-testname-wrapper{
+ float: right;
+}
+
+#blazemeter-signlogin-wrapper{
+clear:both;
+}
+
+#blazemeter-strip{
+  background-color: #2F292B;
+  padding: 5px;
+}
+
+#blazemeter-admin-settings-form .form-text{
+width:100%;
+}
+
+#blazemeter-admin-settings-form #edit-anonymous-anon, 
+#blazemeter-admin-settings-form #edit-authenticated-auth,
+#blazemeter-admin-settings-form #edit-authenticated-unique{
+ width: 100px;
+}
+
+.form-item-anonymous-anon label,
+.form-item-authenticated-auth label,
+.form-item-authenticated-unique label
+{
+ float: left;
+  width: 86%;
+}
+
+#blazemeter-admin-settings-form #edit-meta-domain-domain-2-domain-choice-textfield{
+    width: 400px;
+}
+
+#blazemeter-admin-settings-form #edit-buttons-goto{
+   float: right;
+   width: 50%;
+}
+
+#blazemeter-admin-settings-form #edit-meta-userkey{
+display:none;
+}
