@@ -1,12 +1,5 @@
 ; $Id$
-name = Blazemeter
-description = Integration with Blazemeter
+name = BlazeMeter
+description = Integration with BlazeMeter
 package = Other
 core = 6.x
-
-; Information added by drupal.org packaging script on 2012-06-28
-version = "6.x-1.0-beta1"
-core = "6.x"
-project = "blazemeter"
-datestamp = "1340886380"
-

@@ -30,7 +30,7 @@ function blazemeter_ahah_more_submit($form, &$form_state) {
   $button_id = $form_state['clicked_button']['#id'];
   if (preg_match('/^edit-(.*?)-more$/', $button_id, $match)) {
     $item_name = strtr($match[1], '-', '_');
-  
+
     unset($form_state['submit_handlers']);
     form_execute_handlers('submit', $form, $form_state);
     $form_state['rebuild'] = TRUE;
@@ -39,8 +39,8 @@ function blazemeter_ahah_more_submit($form, &$form_state) {
     $form_state[$item_name . '_count'] = count($form_state['values'][$item_name]) + 1;
   }
   else {
-    watchdog('blazemeter_ahah', 'blazemeter_ahah_more_submit invoked by wrong submit button %button.', 
-        array('%button' => $button_id), WATCHDOG_ALERT);
+    watchdog('blazemeter_ahah', 'blazemeter_ahah_more_submit invoked by wrong submit button %button.',
+      array('%button' => $button_id), WATCHDOG_ALERT);
   }
 }
 
@@ -57,7 +57,7 @@ function blazemeter_ahah_wrapper(&$form, $form_state, $item_name, $fieldset_name
     '#weight' => 1,
     '#prefix' => '<div class="clear-block" id="' . strtr($wrapper_name, '_', '-') . '">',
     '#suffix' => '</div>',
-  ); 
+  );
 
   $js_wrapper = strtr($item_name . 's', '_', '-');
   $wrapper[$item_name] = array(
@@ -77,11 +77,13 @@ function blazemeter_ahah_wrapper(&$form, $form_state, $item_name, $fieldset_name
     if ($fieldset_name == 'anonymous') {
       $item_count = variable_get('blazemeter_numof_anon_pages', 0) + 2;
     }
-    else if($fieldset_name == 'authenticated') {
-      $item_count = variable_get('blazemeter_numof_auth_pages', 0) + 2;
-    }
     else {
-      $item_count = 2;
+      if ($fieldset_name == 'authenticated') {
+        $item_count = variable_get('blazemeter_numof_auth_pages', 0) + 2;
+      }
+      else {
+        $item_count = 2;
+      }
     }
   }
 
@@ -100,15 +102,17 @@ function blazemeter_ahah_wrapper(&$form, $form_state, $item_name, $fieldset_name
     //$submit = 'blazemeter_ahah_anon_submit';
     $text = t('Add Anon Page');
   }
-  else if ($fieldset_name == 'authenticated'){
-    //$submit = 'blazemeter_ahah_auth_submit';
-     $text = t('Add Auth Page');
-  }
   else {
-    $submit = 'blazemeter_ahah_more_submit';
-     $text = t('Add Page');
+    if ($fieldset_name == 'authenticated') {
+      //$submit = 'blazemeter_ahah_auth_submit';
+      $text = t('Add Auth Page');
+    }
+    else {
+      $submit = 'blazemeter_ahah_more_submit';
+      $text = t('Add Page');
+    }
   }
-  
+
   $form[$fieldset_name][$item_name . '_more'] = array(
     '#type' => 'submit',
     '#value' => $text,
@@ -118,8 +122,8 @@ function blazemeter_ahah_wrapper(&$form, $form_state, $item_name, $fieldset_name
       'path' => 'blazemeter_ahah/' . $item_name . '/' . $fieldset_name,
       'wrapper' => $js_wrapper,
       'method' => 'replace',
-      ),
-    );  
+    ),
+  );
 
   return $wrapper;
 }

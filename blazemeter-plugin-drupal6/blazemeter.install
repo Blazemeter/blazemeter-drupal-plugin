@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * Implements hook_requirements().
+ */
+function blazemeter_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  if ($phase == 'runtime' || $phase == 'install') {
+    if (!extension_loaded("curl")) {
+      $requirements['blazemeter_curl'] = array(
+        'value' => $t('php_curl extension is not installed.'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $t("The BlazeMeter module requires php_curl extension to be installed."),
+      );
+    }
+    else {
+      $requirements['blazemeter_curl'] = array(
+        'value' => $t('php_curl extension is installed.'),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+  }
+  $requirements['blazemeter_curl']['title'] = $t('BlazeMeter');
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function blazemeter_install() {
+  drupal_install_schema('blazemeter');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function blazemeter_uninstall() {
+  drupal_uninstall_schema('blazemeter');
+  db_query("DELETE FROM {variable} WHERE name LIKE 'blazemeter_%%'");
+  db_query("DELETE FROM {users} WHERE init='blazemeter'");
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function blazemeter_schema() {
+  /**
+   * blazemeter table
+   */
+  $schema['blazemeter'] = array(
+    'fields' => array(
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique user name.',
+      ),
+      'pass' => array(
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "User's password (plaintext).",
+      ),
+    ),
+    'primary key' => array('name'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Create new database table {blazemeter}.
+ */
+function blazemeter_update_6101() {
+  //Delete all users created prior to this version, as they had static password
+  blazemeter_delete_users();
+
+  $schema['blazemeter'] = array(
+    'fields' => array(
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique user name.',
+      ),
+      'pass' => array(
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "User's password (plaintext).",
+      ),
+    ),
+    'primary key' => array('name'),
+  );
+  $ret = array();
+  db_create_table($ret, 'blazemeter', $schema['blazemeter']);
+  return $ret;
+}
